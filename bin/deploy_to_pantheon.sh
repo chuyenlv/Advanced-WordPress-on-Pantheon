@@ -178,7 +178,7 @@ fi
 echo -e "\n${txtgrn}Sending a message to the ${SLACK_CHANNEL} Slack channel ${txtrst}"
 curl -X POST --data "payload={\"channel\": \"${SLACK_CHANNEL}\", \"username\": \"${SLACK_USERNAME}\", \"text\": \"${SLACK_MESSAGE}\"}" $SLACK_HOOK_URL
 
-if [ $TEST_URL ]
+if [ "$TEST_URL" != "" ]
 then
 	SHA=`git rev-parse HEAD`
 	curl -H "Authorization: token ${GIT_TOKEN}" --request POST --data '{"state": "success", "description": "Url Env", "target_url": "${TEST_URL}"}' https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/statuses/${SHA} > /dev/null
