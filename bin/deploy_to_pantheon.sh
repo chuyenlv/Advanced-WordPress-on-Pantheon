@@ -183,3 +183,5 @@ then
 	SHA=`git rev-parse HEAD`
 	curl -H "Authorization: token ${GIT_TOKEN}" --request POST --data '{"state": "success", "description": "Url Env", "target_url": "${TEST_URL}"}' https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/statuses/$SHA > /dev/null
 fi
+
+echo -e "\n${GIT_TOKEN}"
