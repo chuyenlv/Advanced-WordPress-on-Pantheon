@@ -179,6 +179,6 @@ curl -X POST --data "payload={\"channel\": \"${SLACK_CHANNEL}\", \"username\": \
 if [ $CIRCLE_BRANCH != "master" ]
 then
 	PANTHEON_ENVS_NAME="$(terminus site:info $PANTHEON_SITE_UUID --format=string --field=name)"
-	TEST_URL="$(terminus multidev:list $PANTHEON_SITE_UUID --format=string --field=domain | grep '$normalize_branch-$PANTHEON_ENVS_NAME')"
+	TEST_URL="$(terminus multidev:list $PANTHEON_SITE_UUID --format=string --field=domain | grep $normalize_branch-$PANTHEON_ENVS_NAME)"
 	curl -H "Authorization: token ${GIT_TOKEN}" --request POST --data '{"state": "success", "description": "Url Env", "target_url": "http://"'$TEST_URL'}' https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/statuses/$CIRCLE_SHA1
 fi
